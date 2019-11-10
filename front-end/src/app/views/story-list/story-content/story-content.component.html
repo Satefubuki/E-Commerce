@@ -1,0 +1,33 @@
+<!-- <div appPreventCopy>
+    <p>story-content works!</p>
+    <h3>{{chapName}}</h3>
+    <p [innerHTML]="chapContent"></p>
+</div> -->
+
+<!-- <p *ngFor="let chap of chapters">{{chap.chapname}}</p>
+<p>{{content}}</p> -->
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-3"></div>
+        <div class="col-6">
+            <button class="btn btn-primary btn-sm mr-1"> &#171; Chương trước</button>
+            <select style="width: 200px;" (change)="loadCustomer()"> 
+                <option *ngFor="let chap of chapters" value="{{chap.id}}">
+                    {{chap.chapname}}
+                </option>
+            </select>
+            <button class="btn btn-primary btn-sm ml-1">Chương sau &#187;</button>
+        </div>
+        <div class="col-3"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-1"> </div>
+        <div class="col-10">
+            <p style="font-size: 24px;">{{content}}</p>
+        </div>
+        <div class="col-1"> </div>
+    </div>
+</div>

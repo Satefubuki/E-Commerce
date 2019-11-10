@@ -1,0 +1,146 @@
+<!-- <p>user-story works!</p>
+
+<button type="button" class="btn btn-success" (click)="staticModal.show()">ADD</button>
+
+<table style="width:30%; border: 1px solid black;">
+    <tr>
+        <th style="border: 1px solid black;">ID</th>
+        <th style="border: 1px solid black;">Name</th>
+    </tr>
+    <tr *ngFor="let story of stories">
+        <td style="border: 1px solid black;">{{story.id}}</td>
+        <td style="border: 1px solid black;"><a [routerLink]="[ '/user-stories', story.id ]">{{story.name}}</a></td>
+    </tr>
+</table>
+
+
+
+<div class="modal fade" bsModal #staticModal="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog"
+    aria-labelledby="dialog-static-name">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 id="dialog-static-name" class="modal-title pull-left">Static modal</h4>
+                <button type="button" class="close pull-right" aria-label="Close" (click)="staticModal.hide()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="storyForm" >
+                    <label>
+                        ID:
+                        <input type="text" formControlName="id">
+                    </label>
+
+                    <label>
+                        Name:
+                        <input type="text" formControlName="name">
+                    </label>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-dranger" (click)="save()">Save</button>
+                <button type="button" class="btn btn-primary" (click)="staticModal.hide()">Close</button>
+            </div>
+        </div>
+    </div>
+</div> -->
+<div class="container">
+    <div class="row mt-5">
+        <div class="col">
+            <div class="card">
+                <div class="card-header bg-secondary">
+                    <div class="row">
+                        <div class="col">
+                            <h3>Stories Managerment<button class="btn btn-lg btn-primary" (click)="openAdd(contentAdd)"
+                                    style="float: right;"><i class="fa fa-plus"></i></button></h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <ngx-datatable class="material striped border" [rows]="stories" [columns]="columns" [columnMode]="'force'"
+                        [headerHeight]="50" [footerHeight]="50" [summaryRow]="true" rowHeight="auto"
+                        [externalPaging]="true" [count]="page.totalRows" [offset]="page.pageNumber"
+                        [limit]="page.pageSize" (page)="loadStories($event)">
+                        <ngx-datatable-column name="Storyname">
+                            <ng-template ngx-datatable-header-template>Story name</ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column name="Description"></ngx-datatable-column>
+                        <ngx-datatable-column name="Copyright"></ngx-datatable-column>
+                        <ngx-datatable-column name="ImgUrl"></ngx-datatable-column>
+                        <ngx-datatable-column [width]="40" name="Option">
+                            <ng-template let-row="row" ngx-datatable-cell-template>
+                                <i [routerLink]="[ '/user-stories', row.storyid ]" class="fa fa-list text-info mr-1 pointer"></i>
+                                <i (click)="openEdit(row.id)" class="fa fa-edit text-primary mr-1 pointer"></i>
+                                <i (click)="delete(row.id)" class="fa fa-trash-o text-danger pointer"></i>
+                            </ng-template>
+                        </ngx-datatable-column>
+                    </ngx-datatable>
+                </div>
+
+                <div bsModal #editModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-child-name">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h4 id="dialog-child-name" class="modal-title pull-left">{{action}} Stories</h4>
+                          <button type="button" class="close pull-right" aria-label="Close" (click)="hideModal()">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <form [formGroup]="form" novalidate>
+                            <div class="form-group row">
+                              <label class="col-sm-2 col-form-label col-form-label-sm">Storyname</label>
+                              <div class="col-sm-10">
+                                <input type="text" class="form-control col-lg-10" id="txtName" [ngClass]="{'is-invalid': form.controls['storyname'].touched && form.controls['storyname'].errors, 'is-valid': form.controls['storyname'].touched && !form.controls['storyname'].errors}" formControlName="storyname" [(ngModel)]="story.storyname"
+                                  placeholder="name">
+                                  <div *ngIf="form.controls['storyname'].touched && (form.controls['storyname'].hasError('minlength') || form.controls['storyname'].hasError('maxlength'))" class="invalid-feedback">
+                                      Story name is invalid
+                                    </div>
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <label class="col-sm-2 col-form-label col-form-label-sm">Description</label>
+                              <div class="col-sm-10">
+                                <input type="text" class="form-control col-lg-10" [ngClass]="{'is-invalid': form.controls['description'].touched && form.controls['description'].errors}" (keydown.enter)="save()" id="txtEmail" formControlName="description"
+                                  [(ngModel)]="story.description" placeholder="description">
+                                  <div *ngIf="form.controls['description'].touched && form.controls['description'].hasError('required')" class="invalid-feedback">
+                                      Description is invalid
+                                    </div>
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <label class="col-sm-2 col-form-label col-form-label-sm">Copyright</label>
+                              <div class="col-sm-10">
+                                <input type="text" class="form-control col-lg-10" [ngClass]="{'is-invalid': form.controls['copyright'].touched && form.controls['copyright'].errors}" id="txtPhone" formControlName="copyright"
+                                  [(ngModel)]="story.copyright" placeholder="copyright">
+                                  <div *ngIf="form.controls['copyright'].touched && form.controls['copyright'].hasError('required')" class="invalid-feedback">
+                                      Copyright is invalid
+                                    </div>
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <label class="col-sm-2 col-form-label col-form-label-sm">Image</label>
+                              <div class="col-sm-10">
+                                <input type="text" class="form-control col-lg-10" [ngClass]="{'is-invalid': form.controls['imgurl'].touched && form.controls['imgurl'].errors}" (keydown.enter)="save()" id="txtAddress"
+                                formControlName="imgurl" [(ngModel)]="story.imgurl" placeholder="imgurl">
+                                <div *ngIf="form.controls['imgurl'].touched && form.controls['imgurl'].hasError('required')" class="invalid-feedback">
+                                    Imgurl is invalid
+                                  </div>
+                              </div>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" [disabled]="!form.valid" class="btn btn-outline-dark" (click)="save()">Save</button>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+

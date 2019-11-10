@@ -1,0 +1,51 @@
+<p>user-story-chapters works!</p>
+
+<button type="button" class="btn btn-success" (click)="staticModal.show()">ADD</button>
+
+<table style="width:30%; border: 1px solid black;">
+    <tr>
+        <th style="border: 1px solid black;">Story Chapters</th>
+    </tr>
+    <tr *ngFor="let chap of storyChapters">
+        <td style="border: 1px solid black;"><a [routerLink]="[ '/stories', chap.storyId, chap.id ]">{{chap.name}}</a>
+        </td>
+    </tr>
+</table>
+
+<div class="modal fade" bsModal #staticModal="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog"
+    aria-labelledby="dialog-static-name">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 id="dialog-static-name" class="modal-title pull-left">Static modal</h4>
+                <button type="button" class="close pull-right" aria-label="Close" (click)="staticModal.hide()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="storyForm">
+                    <label>
+                        ID:
+                        <input type="text">
+                    </label>
+                    <label>
+                        Story ID:
+                        <input type="text">
+                    </label>
+                    <label>
+                        Name:
+                        <input type="text">
+                    </label>
+                    <label>
+                        Content:
+                        <ckeditor [editor]="Editor" [config]="{ toolbar: [ 'heading', '|', 'bold', 'italic' ] }"></ckeditor>
+                    </label>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-dranger" (click)="save()">Save</button>
+                <button type="button" class="btn btn-primary" (click)="staticModal.hide()">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
