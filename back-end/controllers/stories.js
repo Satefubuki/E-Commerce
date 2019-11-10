@@ -78,8 +78,8 @@ router.get('/', (req, res) => {
         });
     }
 });
-// get By CustomerType
-router.get('/getByStoryType/:id(\\d+)', (req, res) => {
+// get By UserId
+router.get('/getByUserId/:id(\\d+)', (req, res) => {
     let page = 0;
     if (req.query.p) page = parseInt(req.query.p);
 
@@ -104,7 +104,7 @@ router.get('/getByStoryType/:id(\\d+)', (req, res) => {
     if (queryString.length <= 2) {
         // conditions
         const whereClause = {
-            typeid: req.params.id
+            userid: req.params.id
         }
 
         Story.count({ where: whereClause }).then(numRow => {

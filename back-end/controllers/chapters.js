@@ -98,4 +98,43 @@ router.get('/getStoryChapters/:storyId',(req,res) => {
     })
 })
 
+router.post('/', (req, res) => {
+    Chapter.create(req.body).then(type => {
+        res.json(Result(type));
+    }).catch(err => {
+        return res.status(400).json(ErrorResult(404, err.errors));
+    });
+});
+
+router.put('/:id', (req, res) => {
+    Chapter.findByPk(req.params.id).then(type => {
+        if (type != null) {
+            type.update({
+                chapname: req.body.chapname, 
+                postdata: req.body.postdata,
+                coin: req.body.coin,
+                chapstatus: req.body.chapstatus
+            }).then(type => {
+                res.json(type);
+            }).catch(err => {
+                return res.status(400).send(err.errors);
+            });
+        } else {
+            res.status(404).send('Not Found');
+        }
+    });
+});
+
+router.delete('/:id', (req, res) => {
+    Chapter.destroy({
+        where: {
+            id: req.params.id
+        }
+    }).then(type => {
+        res.json(type);
+    }).catch(err => {
+        return res.status(500).send(err.errors);
+    });
+});
+
 module.exports = router;
