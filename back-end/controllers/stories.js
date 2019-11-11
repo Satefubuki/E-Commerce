@@ -186,31 +186,58 @@ router.get('/:id(\\d+)', (req, res) => {
     });
 });
 
-router.post('/', [
-    check('typeid', 'Invalid number').isNumeric(),
-    check('storyname', 'Is required').not().isEmpty(),
-], (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        return res.status(422).json(ErrorResult(422, errors.array()));
-    }
+// router.post('/', [
+//     check('typeid', 'Invalid number').isNumeric(),
+//     check('storyname', 'Is required').not().isEmpty(),
+// ], (req, res) => {
+//     const errors = validationResult(req);
+//     if (!errors.isEmpty()) {
+//         return res.status(422).json(ErrorResult(422, errors.array()));
+//     }
 
+//     Story.create(req.body).then(type => {
+//         res.json(Result(type));
+//     }).catch(err => {
+//         res.status(500).json(ErrorResult(500, err.errors));
+//     });
+// });
+
+router.post('/', (req, res) => {
     Story.create(req.body).then(type => {
         res.json(Result(type));
     }).catch(err => {
         res.status(500).json(ErrorResult(500, err.errors));
     });
-});
+})
 
-router.put('/:id(\\d+)', [
-    check('typeid', 'Invalid number').isNumeric(),
-    check('storyname', 'Is required').not().isEmpty(),
-], (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        return res.status(422).json(ErrorResult(422, errors.array()));
-    }
+// router.put('/:id(\\d+)', [
+//     check('typeid', 'Invalid number').isNumeric(),
+//     check('storyname', 'Is required').not().isEmpty(),
+// ], (req, res) => {
+//     const errors = validationResult(req);
+//     if (!errors.isEmpty()) {
+//         return res.status(422).json(ErrorResult(422, errors.array()));
+//     }
 
+//     Story.findByPk(req.params.id).then(type => {
+//         if (type != null) {
+//             type.update({
+//                 typeid: req.body.typeid,
+//                 storyname: req.body.storyname,
+//                 description: req.body.description,
+//                 copyright: req.body.copyright
+//             }).then(type => {
+//                 res.json(Result(type));
+//             }).catch(err => {
+//                 res.status(500).json(ErrorResult(500, err.errors));
+//             });
+//         } else {
+//             res.status(404).json(ErrorResult(404, 'Not Found'));
+//         }
+//     });
+// });
+
+router.put('/:id(\\d+)', (req, res) => {
     Story.findByPk(req.params.id).then(type => {
         if (type != null) {
             type.update({
@@ -227,7 +254,7 @@ router.put('/:id(\\d+)', [
             res.status(404).json(ErrorResult(404, 'Not Found'));
         }
     });
-});
+})
 
 router.delete('/:id', (req, res) => {
     Story.destroy({
@@ -244,46 +271,46 @@ router.delete('/:id', (req, res) => {
 // ngăn chặn việc đọc
 router.post('/user-story', (req, res) => {
     console.log(req.body);
-    
+
     // kiểm tra xem chương truyện có bắt trả phí không. nếu không thì hàm sẽ kết thúc tại đây (errorCode = 0)
-    Chapter.findOne(
+    Chapter.findAll(
         {
             where: [
                 { chapid: req.body.chapid },
                 { chapstatus: false }
             ]
         }
-    ).then(type => {
-        if (type != null) {
-            res.json(Result(type));
+    ).then(types => {
+        if (types[0] != null) {
+            res.json(Result(types[0]));
         }
     });
 
     // Nếu đây là chương truyện bắt trả phí thì sẽ kiểm tra xem user có phải là tác giả của nó không
     // Nếu có thì hàm sẽ kết thúc tại đây (errorCode = 0)
-    Story.findOne(
+    Story.findAll(
         {
             where: [
                 { userid: req.body.userid },
                 { storyid: req.body.storyid }]
         }
-    ).then(type => {
-        if (type != null) {
-            res.json(Result(type));
+    ).then(types => {
+        if (types[0] != null) {
+            res.json(Result(types[0]));
         }
     });
 
     // Nếu user không phải là tác giả của chương truyện thì kiểm tra xem user có mua nó chưa.
     // Nếu mua rồi thì trả về errorCode = 0, nếu chưa thì errorCode = 404
-    PurchasedChapter.findOne(
+    PurchasedChapter.findAll(
         {
             where: [
                 { userid: req.body.userid },
                 { chapid: req.body.chapid }]
         }
-    ).then(type => {
-        if (type != null) {
-            res.json(Result(type));
+    ).then(types => {
+        if (types[0] != null) {
+            res.json(Result(types[0]));
         } else {
             res.json(ErrorResult(404, 'Not Found'));
         }
