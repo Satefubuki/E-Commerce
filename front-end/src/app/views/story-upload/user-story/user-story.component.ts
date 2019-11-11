@@ -38,7 +38,7 @@ export class UserStoryComponent implements OnInit {
     this.form = this.fb.group({
       storyname: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
       description: ['', Validators.required],
-      copyright:['', Validators.email],
+      copyright:['', Validators.required],
       imgurl: ['', Validators.required]
     })
    }
@@ -57,6 +57,7 @@ export class UserStoryComponent implements OnInit {
   openAdd() {
     this.action = 'Add';
     this.story = { id: 0 } as Story;
+    this.story.userid = +this.id;
     this.editModal.show();
   }
 
@@ -87,12 +88,12 @@ export class UserStoryComponent implements OnInit {
         this.editModal.hide();
         this.loadStories();
         this.story = {} as Story;
-        this.pnotifyService.success('Info', 'Update susess');
+        this.pnotifyService.success('Info', this.action + ' susessfully');
       } else {
-        this.pnotifyService.error('Info', 'Update failed');
+        this.pnotifyService.error('Info', this.action + ' failed');
       }
     }), err => {
-      this.pnotifyService.error('Info', 'Update failed');
+      this.pnotifyService.error('Info', this.action + ' failed');
     });
   }
 
