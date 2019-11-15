@@ -79,23 +79,82 @@ router.get('/', (req, res) => {
     }
 });
 
-router.get('/getStoryChapters/:storyId',(req,res) => {
+router.get('/getStoryChapters/:storyId', (req, res) => {
+    let page = 0;
+    if (req.query.p) page = parseInt(req.query.p);
+
+    let pageSize = 20;
+    if (req.query.s) pageSize = parseInt(req.query.s);
+
     let queryString = '';
     if (req.query.q) queryString = '%' + decodeURIComponent(req.query.q) + '%';
-    const whereClause = {
-        storyId: req.params.storyId,
-        // [Op.or]: [
-        //     { storyname: { [Op.like]: queryString } },
-        //     { description: { [Op.like]: queryString } },
-        //     { copyright: { [Op.like]: queryString } },
-        // ]
+
+    let sortColumn = 'chapname';
+    let sortDirection = 'ASC';
+    if (req.query.so) {
+        const sortStr = decodeURIComponent(req.query.so).split(' ');
+        sortColumn = sortStr[0];
+        if (sortStr.length == 2) sortDirection = sortStr[1];
     }
-    Chapter.findAll(
-        {where: whereClause,
+
+    const offset = page * pageSize;
+    // const limit = parseInt(offset) + parseInt(pageSize);
+    const limit = pageSize;
+
+    if (queryString.length <= 2) {
+        // conditions
+        const whereClause = {
+            storyid: req.params.storyId
         }
-    ).then(chapters => {
-        return res.json(Result(chapters));
-    })
+
+        Chapter.count({ where: whereClause }).then(numRow => {
+            const totalRows = numRow;
+            const totalPages = Math.ceil(totalRows / pageSize);
+            Chapter.findAll({
+                where: whereClause,
+                order: [[sortColumn, sortDirection]],
+                offset: offset,
+                limit: limit
+                // include: [{ model: Story, as: 'story' }]
+            }).then(chapters => {
+                return res.json(PagingResult(chapters, {
+                    pageNumber: page,
+                    pageSize: pageSize,
+                    totalRows: totalRows,
+                    totalPages: totalPages,
+                }));
+            });
+        });
+    } else { // search
+        // conditions
+        const whereClause = {
+            storyid: req.params.storyId,
+            [Op.or]: [
+                { chapname: { [Op.like]: queryString } },
+                { postdata: { [Op.like]: queryString } },
+                { coin: { [Op.like]: queryString } },
+                { chapstatus: { [Op.like]: queryString } }
+            ]
+        }
+
+        Chapter.count({ where: whereClause }).then(numRow => {
+            const totalRows = numRow;
+            const totalPages = Math.ceil(totalRows / pageSize);
+            Chapter.findAll({
+                where: whereClause,
+                offset: offset,
+                limit: limit,
+                include: [{ model: Story, as: 'story' }]
+            }).then(chapters => {
+                return res.json(PagingResult(chapters, {
+                    pageNumber: page,
+                    pageSize: pageSize,
+                    totalRows: totalRows,
+                    totalPages: totalPages,
+                }));
+            });
+        });
+    }
 })
 
 router.post('/', (req, res) => {
@@ -110,7 +169,7 @@ router.put('/:id', (req, res) => {
     Chapter.findByPk(req.params.id).then(type => {
         if (type != null) {
             type.update({
-                chapname: req.body.chapname, 
+                chapname: req.body.chapname,
                 postdata: req.body.postdata,
                 coin: req.body.coin,
                 chapstatus: req.body.chapstatus
