@@ -31,8 +31,13 @@ export class PreventReadingGuard implements CanActivate {
 
     this.storyid = this.router.getCurrentNavigation().extras.state.storyid;
     this.chapid = this.router.getCurrentNavigation().extras.state.chapid;
+
+    // neu chua  dang nhap thi chuyen den login
     if (this.cookieService.get('userInfo') !== '') {
       this.userid = JSON.parse(this.cookieService.get('userInfo')).id;
+    } else {
+      this.router.navigate(['login']);
+      return false;
     }
 
     return this.storiesService.checkUserStory(
@@ -46,6 +51,7 @@ export class PreventReadingGuard implements CanActivate {
       if (res.errorCode === 0) {
         return true;
       } else {
+        this.router.navigate(['story-payment'], { state: { storyid: this.storyid, chapid: this.chapid } });
         return false;
       }
     }));

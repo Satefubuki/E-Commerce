@@ -1,3 +1,5 @@
+import { User } from './user';
+
 export interface Story {
     id: number;
     storyname: string;
@@ -6,5 +8,6 @@ export interface Story {
     imgUrl: string;
     typeid: number;
     userid: number;
+    user: User;
 }
 

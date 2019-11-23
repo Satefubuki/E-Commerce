@@ -16,12 +16,13 @@ export class ApiService {
     },
     stories: {
       home: `${this.baseUrl}stories`,
-      getStoriesByUserId:`${this.baseUrl}stories/getByUserId`,
+      getStoriesByUserId: `${this.baseUrl}stories/getByUserId`,
       checkUserStory: `${this.baseUrl}stories/user-story`,
     },
     chapters: {
-      home:  `${this.baseUrl}chapters`,
+      home: `${this.baseUrl}chapters`,
       listByStoryId: `${this.baseUrl}chapters/getStoryChapters`,
+      buy: `${this.baseUrl}chapters/chapter-paying`,
     },
     chapterContent: {
       home: `${this.baseUrl}chapter-content`,

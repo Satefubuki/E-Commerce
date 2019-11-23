@@ -35,7 +35,6 @@ export class StoriesService {
     }
   }
   checkUserStory(data: object): Observable<RootObj<object>> {
-    console.log('da gui:' + JSON.stringify(data));
     return this.apiService.post<RootObj<object>>(`${this.apiService.apiUrl.stories.checkUserStory}`, data);
   }
   list2(): Observable<RootObj<[Story]>> {

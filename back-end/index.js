@@ -10,8 +10,8 @@ app.use(cors({
     methods: ['OPTIONS', 'GET', 'POST', 'PUT', 'PATCH', 'DELETE']
 }));
 
-const auth = require('./middleware/auth');
-app.use(auth);
+// const auth = require('./middleware/auth');
+// app.use(auth);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
