@@ -1,0 +1,36 @@
+h3 {
+    color: red;
+    text-align: center;
+    margin-top: 100px;
+}
+.form-login{
+    text-align: center;
+    margin-top: 50px;
+}
+.login {
+    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTEom5scgJoVa_t98Hj4xz8sABjhwoyGsMFLe7_EJ4ctIwQRUE&s');
+    background-size: 200%;
+    /*padding-top: 60px;
+    padding-bottom: 190px;*/
+}
+.username{
+    margin: 5px;
+}
+.pass{
+    margin:5px;
+    margin-left:39px;
+}
+input{
+    margin-left: 10px;
+    padding-right: 15px;
+    border-style: inset;
+    border-radius: 5px;
+}
+.forgot{
+    font-size: 13px;
+    margin-left: 225px;
+}
+.button-submit{
+    margin-top:10px;
+    margin-left: 50px;
+}
