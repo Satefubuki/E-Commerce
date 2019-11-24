@@ -10,11 +10,16 @@ import { User } from '../models/user';
 export class UserService {
 
     constructor(private apiService: ApiService) { }
+
     login(userName: string, passWord: string): Observable<RootObj<User>> {
         const data = {
             username: userName,
             password: passWord
         };
         return this.apiService.post<RootObj<User>>(this.apiService.apiUrl.users.login, data);
+    }
+
+    get(id): Observable<RootObj<User>> {
+        return this.apiService.get<RootObj<User>>(`${this.apiService.apiUrl.users.home}/${id}`);
     }
 }

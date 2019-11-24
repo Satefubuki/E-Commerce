@@ -15,6 +15,7 @@ export class StoryChaptersService {
   list(): Observable<RootObj<[StoriesChapter]>> {
     return this.apiService.get<RootObj<[StoriesChapter]>>(this.apiService.apiUrl.chapters.home);
   }
+<<<<<<< HEAD
   // get(id): Observable<RootObj<Story>> {
   //   return this.apiService.get<RootObj<Story>>(`${this.apiService.apiUrl.stories.home}/${id}`);
   // }
@@ -37,6 +38,18 @@ export class StoryChaptersService {
     } else {
       return this.apiService.put<RootObj<StoriesChapter>>(`${this.apiService.apiUrl.chapters.home}/${data.id}`, data);
     }
+=======
+  get(id): Observable<RootObj<StoriesChapter>> {
+    return this.apiService.get<RootObj<StoriesChapter>>(`${this.apiService.apiUrl.chapters.home}/${id}`);
+  }
+  listByStoryId(id): Observable<RootObj<[StoriesChapter]>> {
+    return this.apiService.get<RootObj<[StoriesChapter]>>(`${this.apiService.apiUrl.chapters.listByStoryId}/${id}`);
+>>>>>>> 72ca0893509aaf2426db720f672072fea7c27670
+  }
+  buyChapter(data: object): Observable<RootObj<object>> {
+    console.log(this.apiService.apiUrl.chapters.buy);
+    
+    return this.apiService.post<RootObj<object>>(`${this.apiService.apiUrl.chapters.buy}`, data);
   }
 
 }

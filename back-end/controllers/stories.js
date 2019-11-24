@@ -2,7 +2,7 @@ const express = require('express');
 const sequelize = require('sequelize');
 const { check, validationResult } = require('express-validator');
 const Op = sequelize.Op;
-const { StoryType, Story, Chapter, PurchasedChapter } = require('../models/db');
+const { StoryType, Story, Chapter, PurchasedChapter, User } = require('../models/db');
 const { ErrorResult, Result, PagingResult } = require('../utils/base_response');
 const router = express.Router();
 router.use((req, res, next) => {
@@ -176,10 +176,25 @@ router.get('/getStory/:id', (req, res) => {
     })
 })
 
+// router.get('/:id(\\d+)', (req, res) => {
+//     Story.findByPk(req.params.id,).then(type => {
+//         if (type != null1) {
+//             res.json(Result(type));
+//         } else {
+//             res.status(404).json(ErrorResult(404, 'Not Found'));
+//         }
+//     });
+// });
+
 router.get('/:id(\\d+)', (req, res) => {
-    Story.findByPk(req.params.id).then(type => {
-        if (type != null) {
-            res.json(Result(type));
+    Story.findAll(
+        {
+            where: { storyid: req.params.id },
+            include: [{ model: User, as: 'user' }]
+        }
+    ).then(type => {
+        if (type[0] != null) {
+            res.json(Result(type[0]));
         } else {
             res.status(404).json(ErrorResult(404, 'Not Found'));
         }
@@ -316,5 +331,7 @@ router.post('/user-story', (req, res) => {
         }
     });
 });
+
+
 
 module.exports = router;

@@ -2,7 +2,7 @@ const express = require('express');
 const sequelize = require('sequelize');
 const { check, validationResult } = require('express-validator');
 const Op = sequelize.Op;
-const { Chapter } = require('../models/db');
+const { Chapter, PurchasedChapter, User } = require('../models/db');
 const { ErrorResult, Result, PagingResult } = require('../utils/base_response');
 const router = express.Router();
 
@@ -157,6 +157,22 @@ router.get('/getStoryChapters/:storyId', (req, res) => {
     }
 })
 
+router.get('/:id(\\d+)', (req, res) => {
+    console.log(req.params);
+    
+    Chapter.findAll(
+        {
+            where: { id: req.params.id }
+        }
+    ).then(type => {
+        if (type[0] != null) {
+            res.json(Result(type[0]));
+        } else {
+            res.status(404).json(ErrorResult(404, 'Not Found'));
+        }
+    });
+});
+
 router.post('/', (req, res) => {
     Chapter.create(req.body).then(type => {
         res.json(Result(type));
@@ -204,6 +220,56 @@ router.delete('/:id', (req, res) => {
     }).catch(err => {
         return res.status(500).send(err.errors);
     });
+});
+
+// mua truyện
+router.post('/chapter-paying', (req, res) => {
+    // api = {
+    //     "buyerid": 2,
+    //     "sellerid": 1,
+    //     "chapid": 3,
+    //     "chapCoin": 5
+    // }
+    let addingCoin = Number(req.body.chapCoin - (req.body.chapCoin * 20) / 100);
+
+    User.findByPk(req.body.sellerid).then(seller => {
+        if (seller) {
+            //cộng xu vào tài khoản chủ của chương (đã trừ 10%)
+            seller.update({
+                coin: (seller.coin + addingCoin)
+            }).catch(err => {
+                res.status(500).json(ErrorResult(500, err.errors));
+            });
+        }
+        else
+            res.json(ErrorResult(404, 'Not Found'));
+    }, err => { res.status(500).json(ErrorResult(500, err.errors)); });
+
+    // update lại coin user sau khi mua truyện
+    User.findByPk(req.body.buyerid).then(buyer => {
+        if (buyer) {
+            buyer.update({
+                coin: buyer.coin - req.body.chapCoin
+            }).catch(err => {
+                res.status(500).json(ErrorResult(500, err.errors));
+            });
+        }
+        else
+            res.json(ErrorResult(404, 'Not Found'));
+    }, err => { res.status(500).json(ErrorResult(500, err.errors)); });
+
+    // thêm mới thông tin (UserId, ChapId) vào bảng PurchasedChapter
+    PurchasedChapter.create(
+        {
+            userid: req.body.buyerid,
+            chapid: req.body.chapid
+        }
+    ).then(type => {
+        res.json(Result(type));
+    }).catch(err => {
+        res.status(500).json(ErrorResult(500, err.errors));
+    });
+
 });
 
 module.exports = router;

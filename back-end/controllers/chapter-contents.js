@@ -23,4 +23,16 @@ router.get('/:id(\\d+)', (req, res) => {
     });
 });
 
+// router.get('/:id(\\d+)', (req, res) => {
+//     ChapterContent.findByPk(req.params.id,{
+//         include: [{ model: Chapter, as: 'Chapters' }]
+//     }).then(type => {
+//         if (type != null) {
+//             res.json(Result(type));
+//         } else {
+//             res.status(404).json(ErrorResult(404, 'Not Found'));
+//         }
+//     });
+// });
+
 module.exports = router;

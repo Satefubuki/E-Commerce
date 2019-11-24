@@ -1,4 +1,19 @@
-<p>login works!</p>
-User: <input type="text" [(ngModel)]="username" name="username">
-Password: <input type="password" [(ngModel)]="password" name="password">
-<button (click)=" login()">submit</button>
+<div class="login">
+  <h3>ĐĂNG NHẬP</h3>
+  <div class="form-login">
+    <div class="username">
+      <span class="username-text">Tên đăng nhập:</span>
+      <input type="text" [(ngModel)]="username" name="username">
+    </div>
+    <div class="pass">
+      <span class="pass-text">Mật khẩu: </span>
+      <input type="password" [(ngModel)]="password" name="password">
+    </div>
+    <div class="forgot">
+        <a href="#">Quên mật khẩu</a>
+    </div>
+    <div class="button-submit">
+      <button type="button" class="btn btn-success" (click)=" login()">Xác nhận</button>
+    </div>
+  </div>
+</div>
