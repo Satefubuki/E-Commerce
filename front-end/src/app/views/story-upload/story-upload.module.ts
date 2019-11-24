@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { UserStoryComponent } from './user-story/user-story.component';
 import { UserStoryChaptersComponent } from './user-story-chapters/user-story-chapters.component';
 
-import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { StoryUploadRoutingModule } from './story-upload-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ModalModule } from 'ngx-bootstrap/modal';
@@ -21,8 +20,7 @@ import { AppGuard } from 'src/app/app.guard';
     ReactiveFormsModule,
     StoryUploadRoutingModule,
     NgxDatatableModule,
-    ModalModule.forRoot(),
-    CKEditorModule
+    ModalModule.forRoot()
   ],
   providers: [
     {

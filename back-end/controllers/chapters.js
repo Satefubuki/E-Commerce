@@ -184,6 +184,16 @@ router.put('/:id', (req, res) => {
     });
 });
 
+router.get('/:id(\\d+)', (req, res) => {
+    Chapter.findByPk(req.params.id).then(type => {
+        if (type != null) {
+            res.json(Result(type));
+        } else {
+            res.status(404).json(ErrorResult(404, 'Not Found'));
+        }
+    });
+});
+
 router.delete('/:id', (req, res) => {
     Chapter.destroy({
         where: {
