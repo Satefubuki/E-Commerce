@@ -12,21 +12,25 @@ import { FormsModule } from '@angular/forms';
 import { AppInterceptor } from './app.interceptor';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { AppGuard } from './app.guard';
-
+import {FileUploadModule} from 'ng2-file-upload/file-upload/file-upload.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    FileUploadModule,
     AppRoutingModule,
     StoryListModule,
     StoryUploadModule,
     UserActionModule,
     HttpClientModule,
-    NgxDatatableModule
+    NgxDatatableModule,
+  
+    
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

@@ -12,6 +12,9 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppInterceptor } from 'src/app/app.interceptor';
 import { CookieService } from 'ngx-cookie-service';
 import { AppGuard } from 'src/app/app.guard';
+import {FileUploadModule} from 'ng2-file-upload/file-upload/file-upload.module';
+
+
 
 @NgModule({
   declarations: [UserStoryComponent, UserStoryChaptersComponent],
@@ -20,7 +23,8 @@ import { AppGuard } from 'src/app/app.guard';
     ReactiveFormsModule,
     StoryUploadRoutingModule,
     NgxDatatableModule,
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    FileUploadModule
   ],
   providers: [
     {
