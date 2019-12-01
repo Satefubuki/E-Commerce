@@ -222,6 +222,8 @@ router.get('/:id(\\d+)', (req, res) => {
 
 router.post('/', (req, res) => {
     req.body.imgUrl = sto.getItemSync('img');
+    req.destroy.imgurl;
+    console.log(req.body);
     Story.create(req.body).then(type => {
         res.json(Result(type));
     }).catch(err => {

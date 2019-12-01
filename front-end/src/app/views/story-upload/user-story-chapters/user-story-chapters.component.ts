@@ -24,7 +24,7 @@ export class UserStoryChaptersComponent implements OnInit {
     { name: 'Coin', sortTable: true },
     { name: 'Chapstatus', sortTable: true },
   ];
-
+  fileContent: string = '';
   chapters: StoriesChapter[] = [];
   chapter: StoriesChapter = { id: 0 } as StoriesChapter;
   id: string;
@@ -71,6 +71,24 @@ export class UserStoryChaptersComponent implements OnInit {
       this.chapter = res.data;
       this.editModal.show();
     });
+  }
+  public onChange(fileList: FileList): void {
+    let file = fileList[0];
+    let fileReader: FileReader = new FileReader();
+    let self = this;
+    fileReader.onloadend = function(x) {
+      self.fileContent = fileReader.result as string;
+    }
+    fileReader.readAsText(file);
+    //this.chapter.postdata = fileReader.result.toString();
+    setTimeout(() => {
+      this.chapter.postdata = fileReader.result.toString();
+    }, 1000);
+    // fileReader.onload = function(){
+    //   this.chapter.postdata = fileReader.result;
+    // }
+    console.log(fileReader.result );
+    
   }
 
   loadChapters(page = null) {
