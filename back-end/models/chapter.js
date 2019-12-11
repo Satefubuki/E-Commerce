@@ -11,7 +11,7 @@ module.exports = (sequelize, type) => {
             allowNull: false
         },
         postdata: {
-            type: type.STRING,
+            type: type.STRING(4000),
             allowNull: true
         },
         coin: {

@@ -5,6 +5,9 @@ const Op = sequelize.Op;
 const { StoryType, Story, Chapter, PurchasedChapter, User } = require('../models/db');
 const { ErrorResult, Result, PagingResult } = require('../utils/base_response');
 const router = express.Router();
+var sto = require('node-persist');
+
+
 router.use((req, res, next) => {
     //phan quyen o day
     next();
@@ -218,6 +221,9 @@ router.get('/:id(\\d+)', (req, res) => {
 // });
 
 router.post('/', (req, res) => {
+    req.body.imgUrl = sto.getItemSync('img');
+    req.destroy.imgurl;
+    console.log(req.body);
     Story.create(req.body).then(type => {
         res.json(Result(type));
     }).catch(err => {
@@ -259,7 +265,8 @@ router.put('/:id(\\d+)', (req, res) => {
                 typeid: req.body.typeid,
                 storyname: req.body.storyname,
                 description: req.body.description,
-                copyright: req.body.copyright
+                copyright: req.body.copyright,
+                imgUrl: sto.getItemSync('img')
             }).then(type => {
                 res.json(Result(type));
             }).catch(err => {
