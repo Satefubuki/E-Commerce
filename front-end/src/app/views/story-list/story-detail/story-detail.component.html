@@ -1,0 +1,57 @@
+<!-- <p>story-detail works!</p>
+
+<table style="width:30%; border: 1px solid black;">
+    <tr>
+        <th style="border: 1px solid black;">Story Chapters</th>
+    </tr>
+    <tr *ngFor="let chap of storyChapters">
+        <td style="border: 1px solid black;"><a [routerLink]="[ '/stories', chap.storyId, chap.id ]">{{chap.name}}</a></td>
+    </tr>
+</table> -->
+
+<div class="container">
+    <div class="row mt-4">
+        <div class="col-8 border shadow-sm">
+            <div class="row">
+                <div class="col-4" style="font-size: 12px;">
+                    <img src="https://cf.shopee.vn/file/dcb8b2fd5b6aef2e88518679529365ed" class="img-thumbnail"
+                        alt="loading...">
+                    <br> <a href="#"><i></i>Tên tác giả</a>
+                    <br> <a href="#"><i></i>Thể loại</a>
+                    <br> <span><i></i>Tải lên: 09:19:42 20/06/2018</span>
+                    <br> <span href="#"><i></i>Chỉnh sửa: 15:14:23 19/07/2019</span>
+                </div>
+                <div class="col-8">
+                    <h4 class="font-weight-bolder text-danger">{{story.storyname}}</h4>
+                    <br> <button class="ml-5 btn btn-primary">DS Chương</button> <button
+                        class="ml-2 btn btn-primary">Đọc truyện</button>
+                    <br> <button class="ml-5 mt-2 btn btn-primary">Thêm vào truyện yêu thích</button>
+                    <br>
+                    <p class="mt-2">{{story.description}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-1"></div>
+        <div class="col-3" style="background-color: royalblue;"></div>
+    </div>
+    <!----------------------------->
+    <div class="row mt-4">
+        <div class="col-8 border shadow-sm">
+            <div class="border-bottom" name="dstruyen">
+                <h5 class="text-primary font-weight-normal"> Danh sách chương truyện: {{story.storyname}}</h5>
+            </div>
+            <div>
+                <ul *ngFor="let chap of storyChapters">
+                    <li class="text-primary">
+                        <a [routerLink]="[ '/stories', chap.storyid, chap.id ]"
+                            [state]="{storyid: story.id ,chapid: chap.id}">
+                            <span *ngIf="chap.chapstatus == false">{{chap.chapname}}</span>
+                            <span *ngIf="chap.chapstatus == true">{{chap.chapname}} (*)</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-4"></div>
+    </div>
+</div>
