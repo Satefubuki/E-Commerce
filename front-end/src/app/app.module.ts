@@ -13,6 +13,9 @@ import { AppInterceptor } from './app.interceptor';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { AppGuard } from './app.guard';
 import { AdminActionModule } from './views/admin-action/admin-action.module';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import {FileUploadModule} from 'ng2-file-upload/file-upload/file-upload.module';
+
 
 @NgModule({
   declarations: [
@@ -21,13 +24,16 @@ import { AdminActionModule } from './views/admin-action/admin-action.module';
   imports: [
     BrowserModule,
     FormsModule,
+    FileUploadModule,
     AppRoutingModule,
     StoryListModule,
     StoryUploadModule,
     UserActionModule,
     AdminActionModule,
     HttpClientModule,
-    NgxDatatableModule
+    NgxDatatableModule,
+    MDBBootstrapModule.forRoot()
+
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
