@@ -13,8 +13,6 @@ export class FormInputComponent implements OnInit {
   @Input() type: string = '';
   @Input() maxlength: number = 32767;
   @Input() placeholder: string;
-
-
   data: string;
   @Output() ngModelChange: EventEmitter<string> = new EventEmitter<string>();
   @Input() get ngModel() {
