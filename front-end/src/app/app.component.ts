@@ -1,40 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
-import { AuthService } from 'src/app/services/auth.service';
-import { Router } from '@angular/router';
-
+import { User } from './models/user';
 
 @Component({
-  selector: 'app-root,ngbd-dropdown-basic',
+  selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit{
-  userName: string;
-  userid: string;
-  show: boolean;
-  constructor(
-    private cookieService: CookieService,
-    private authService: AuthService,
-    private router: Router
-    ) { }
+export class AppComponent implements OnInit {
+
+  title = 'storiesV1U1';
+  isLogin = false;
+  user: User;
+  constructor(private cookieService: CookieService, ) {
+
+  }
 
   ngOnInit(): void {
-   if(this.authService.isLoggedIn === true){
-      this.userName = this.cookieService.get('username');
-      this.userid = this.cookieService.get('userID');
-      console.log(this.cookieService.get('username'));
-      
-      this.show = true;
-   }
+    if (this.cookieService.get('userInfo') !== '') {
+      this.isLogin = !this.isLogin;
+      this.user = JSON.parse(this.cookieService.get('userInfo'));
+    }
   }
-  title = 'storiesV1U1';
-
-  logout(): void{
-    this.authService.setLoggedIn(false);
-    this.cookieService.deleteAll('/');
-    this.show = false;
-    this.router.navigate(['/']);
-}
 
 }

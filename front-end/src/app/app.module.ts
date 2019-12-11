@@ -12,26 +12,22 @@ import { FormsModule } from '@angular/forms';
 import { AppInterceptor } from './app.interceptor';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { AppGuard } from './app.guard';
-import {FileUploadModule} from 'ng2-file-upload/file-upload/file-upload.module';
-import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { AdminActionModule } from './views/admin-action/admin-action.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    
+    AppComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    FileUploadModule,
     AppRoutingModule,
     StoryListModule,
     StoryUploadModule,
     UserActionModule,
+    AdminActionModule,
     HttpClientModule,
-    NgxDatatableModule,
-    MDBBootstrapModule.forRoot()
-    
+    NgxDatatableModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
@@ -39,7 +35,7 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
     multi: true
   },
     CookieService,
-    AppGuard,
+    AppGuard
   ],
   bootstrap: [AppComponent]
 })

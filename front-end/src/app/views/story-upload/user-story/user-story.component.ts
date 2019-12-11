@@ -6,9 +6,6 @@ import { StoriesService } from 'src/app/services/stories.service';
 import { PnotifyService } from 'src/app/utils/pnotify.service';
 import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
-
-const URL = 'http://localhost:3000/api/upload';
 @Component({
   selector: 'app-user-story',
   templateUrl: './user-story.component.html'
@@ -18,7 +15,7 @@ export class UserStoryComponent implements OnInit {
   @ViewChild('editModal', { static: false }) editModal: ModalDirective;
   action: string;
   page: Page = { pageNumber: 0, pageSize: 5 } as Page;
-  public uploader: FileUploader = new FileUploader({ url: URL, itemAlias: 'photo' });
+
   columns = [
     { name: 'Storyname', prop: 'storyname', sortTable: true },
     { name: 'Description', sortTable: true },
@@ -29,7 +26,7 @@ export class UserStoryComponent implements OnInit {
   stories: Story[] = [];
   story: Story = {id: 0} as Story;
   id: string;
-  imgurl: string;
+
   form: FormGroup;
 
   constructor(
@@ -43,16 +40,12 @@ export class UserStoryComponent implements OnInit {
       description: ['', Validators.required],
       copyright:['', Validators.required],
       imgurl: ['', Validators.required]
-    });
+    })
    }
 
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');
     this.loadStories();
-    this.uploader.onAfterAddingFile = (file) => { file.withCredentials = false; };
-    this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
-         console.log('ImageUpload:uploaded:', item, status, response);
-    };
   }
 
   // modals

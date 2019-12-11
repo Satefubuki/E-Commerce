@@ -4,7 +4,6 @@ import { StoriesChapter } from 'src/app/models/stories-chapter';
 import { Story } from 'src/app/models/story';
 import { StoryChaptersService } from 'src/app/services/story-chapters.service';
 import { StoriesService } from 'src/app/services/stories.service';
-import { Page } from 'src/app/models/page';
 
 @Component({
   selector: 'app-story-detail',
@@ -14,8 +13,6 @@ import { Page } from 'src/app/models/page';
 export class StoryDetailComponent implements OnInit {
   story: Story;
   storyChapters: [StoriesChapter];
-
-  page: Page = { pageNumber: 0, pageSize: 5 } as Page;
 
   constructor(
     private router: Router,
@@ -33,7 +30,7 @@ export class StoryDetailComponent implements OnInit {
       this.story = res.data;
     });
 
-    this.storyChaptersService.listByStoryId(stotyId, this.page).subscribe(res => {
+    this.storyChaptersService.listByStoryId(stotyId).subscribe(res => {
       this.storyChapters = res.data;
     });
 
