@@ -25,6 +25,7 @@ export class UserStoryChaptersComponent implements OnInit {
     { name: 'Chapstatus', sortTable: true },
   ];
   fileContent: string = '';
+  txtFile: File;
   chapters: StoriesChapter[] = [];
   chapter: StoriesChapter = { id: 0 } as StoriesChapter;
   id: string;
@@ -58,6 +59,8 @@ export class UserStoryChaptersComponent implements OnInit {
 
   // show modal
   openAdd() {
+    //this.txtFile = new;
+    this.fileContent = '';
     this.action = 'Add';
     this.chapter = { id: 0 } as StoriesChapter;
     this.editModal.show();
@@ -65,7 +68,9 @@ export class UserStoryChaptersComponent implements OnInit {
 
   openEdit(id) {
     event.preventDefault();
+    //this.txtFile = new;
     this.action = 'Edit';
+    this.fileContent = '';
     // load data here by id, then show dialog
     this.chapterService.get(id).subscribe(res => {
       this.chapter = res.data;

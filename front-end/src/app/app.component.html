@@ -1,12 +1,34 @@
-<div class="row" style="background-image: linear-gradient(seagreen,lightgreen);">
-    <div class="col-9">
-        <img src="http://img.app.kiwi/icon/7cMLCTl4n4ItjK54EccOFJ_toFphkxAo-GIg2K7wrN7bjXVcP_oxez1JnyrQt3rLRV0" width="60px" style="margin-left: 15px;" [routerLink]="[ '/stories']">
+<div class="navbar navbar-light bg-light justify-content-between" style="background-image: linear-gradient(rgb(255, 255, 255),rgb(155, 192, 226));">
+    <div class="navbar-brand">
+        <img src="../assets/logo.png" width="80px" height="60px" style="margin-left: 10px;" [routerLink]="[ '/stories']">
     </div>
-    <div class="col-1.5">
-        <button class="btn btn-danger" [routerLink]="[ '/login']" style="margin: 9px;">Đăng nhập</button>
+    <div *ngIf="show; else elseBlock">
+        <div class="mr-sm-2">
+       
+        
+        <div class="" mdbDropdown>
+            <button mdbDropdownToggle type="button" mdbBtn class="dropdown-toggle">
+              Xin chào, {{userName}}
+            </button>
+          
+            <div class="dropdown-menu dropdown-primary">
+              <a class="dropdown-item" [routerLink]="[ '/list', userid ]">Danh sách tryuện</a>
+              <a class="dropdown-item" href="#">Something else here</a>
+              <a class="dropdown-item" href="#">Something else here</a>
+              <div class="divider dropdown-divider"></div>
+              <a class="dropdown-item" (click)=" logout()">Đăng xuất</a>
+            </div>
+          </div>
+        </div>
     </div>
-    <div class="col-1.5">
-            <button class="btn btn-danger" [routerLink]="[ '/register']" style="margin: 9px;">Đăng kí</button>
-    </div>
+    <ng-template #elseBlock>
+        <div class="mr-sm-2">
+            <div class="">
+                <button class="btn btn-outline-primary" [routerLink]="[ '/login']" style="margin: 9px;">Đăng nhập</button>
+                <button class="btn btn-outline-danger" [routerLink]="[ '/register']" style="margin: 9px;">Đăng kí</button>
+            </div>  
+        </div>  
+    </ng-template>
 </div>
+
 <router-outlet></router-outlet>

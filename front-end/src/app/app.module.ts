@@ -13,6 +13,7 @@ import { AppInterceptor } from './app.interceptor';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { AppGuard } from './app.guard';
 import {FileUploadModule} from 'ng2-file-upload/file-upload/file-upload.module';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,7 @@ import {FileUploadModule} from 'ng2-file-upload/file-upload/file-upload.module';
     UserActionModule,
     HttpClientModule,
     NgxDatatableModule,
-  
+    MDBBootstrapModule.forRoot()
     
   ],
   providers: [{
@@ -38,7 +39,7 @@ import {FileUploadModule} from 'ng2-file-upload/file-upload/file-upload.module';
     multi: true
   },
     CookieService,
-    AppGuard
+    AppGuard,
   ],
   bootstrap: [AppComponent]
 })
