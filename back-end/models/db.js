@@ -9,6 +9,7 @@ const RateModel = require('./rate');
 const FavoriteStoryModel = require('./favorite-story');
 const ReadingHistoryModel = require('./reading-history');
 const TransactionHistoryModel = require('./transaction-history');
+const PaymentHistoryModel = require('./payment-history');
 const CommentModel = require('./comment');
 const UnlockModel = require('./unlock');
 const RoleModel = require('./role');
@@ -41,6 +42,7 @@ const Rate = RateModel(sequelize, Sequelize);
 const FavoriteStory = FavoriteStoryModel(sequelize, Sequelize);
 const ReadingHistory = ReadingHistoryModel(sequelize, Sequelize);
 const TransactionHistory = TransactionHistoryModel(sequelize, Sequelize);
+const PaymentHistory = PaymentHistoryModel(sequelize, Sequelize);
 const Comment = CommentModel(sequelize, Sequelize);
 const Unlock = UnlockModel(sequelize, Sequelize);
 const Role = RoleModel(sequelize, Sequelize);
@@ -93,6 +95,9 @@ User.hasMany(Unlock, {foreignKey: 'userid', as: 'unlocks'});
 TransactionHistory.belongsTo(User, {foreignKey: 'userid', as: 'user'});
 User.hasMany(TransactionHistory, {foreignKey: 'userid', as: 'transactionHistories'});
 
+PaymentHistory.belongsTo(User, {foreignKey: 'userid', as: 'user'});
+User.hasMany(PaymentHistory, {foreignKey: 'userid', as: 'paymentHistory'});
+
 User.belongsToMany(Role, {through: RoleDetail});
 Role.belongsToMany(User, {through: RoleDetail});
 
@@ -111,6 +116,7 @@ module.exports = {
     FavoriteStory,
     ReadingHistory,
     TransactionHistory,
+    PaymentHistory,
     Comment,
     Unlock,
     Role,

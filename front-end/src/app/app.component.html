@@ -1,12 +1,16 @@
 <div class="row" style="background-image: linear-gradient(seagreen,lightgreen);">
     <div class="col-9">
-        <img src="http://img.app.kiwi/icon/7cMLCTl4n4ItjK54EccOFJ_toFphkxAo-GIg2K7wrN7bjXVcP_oxez1JnyrQt3rLRV0" width="60px" style="margin-left: 15px;" [routerLink]="[ '/stories']">
+        <img src="http://img.app.kiwi/icon/7cMLCTl4n4ItjK54EccOFJ_toFphkxAo-GIg2K7wrN7bjXVcP_oxez1JnyrQt3rLRV0"
+            width="60px" style="margin-left: 15px;" [routerLink]="[ '/stories']">
     </div>
-    <div class="col-1.5">
+    <div *ngIf="!isLogin" class="col-1.5">
         <button class="btn btn-danger" [routerLink]="[ '/login']" style="margin: 9px;">Đăng nhập</button>
     </div>
-    <div class="col-1.5">
-            <button class="btn btn-danger" [routerLink]="[ '/register']" style="margin: 9px;">Đăng kí</button>
+    <div *ngIf="!isLogin" class="col-1.5">
+        <button class="btn btn-danger" [routerLink]="[ '/register']" style="margin: 9px;">Đăng kí</button>
+    </div>
+    <div *ngIf="isLogin" class="col-1.5">
+        {{user.username}}
     </div>
 </div>
 <router-outlet></router-outlet>

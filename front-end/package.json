@@ -26,6 +26,7 @@
     "font-awesome": "^4.7.0",
     "ngx-bootstrap": "^5.2.0",
     "ngx-cookie-service": "^2.2.0",
+    "ngx-paypal": "^5.0.0",
     "pnotify": "^4.0.0",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",

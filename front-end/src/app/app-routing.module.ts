@@ -4,7 +4,7 @@ import { AppGuard } from './app.guard';
 
 
 const routes: Routes = [
-  {path: '',  redirectTo: '/stories', pathMatch: 'full' },
+  { path: '', redirectTo: '/stories', pathMatch: 'full' },
 ];
 
 @NgModule({

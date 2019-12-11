@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { AppInterceptor } from './app.interceptor';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { AppGuard } from './app.guard';
+import { AdminActionModule } from './views/admin-action/admin-action.module';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { AppGuard } from './app.guard';
     StoryListModule,
     StoryUploadModule,
     UserActionModule,
+    AdminActionModule,
     HttpClientModule,
     NgxDatatableModule
   ],

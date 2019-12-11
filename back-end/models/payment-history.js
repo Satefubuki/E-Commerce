@@ -1,29 +1,33 @@
 module.exports = (sequelize, type) => {
-    return sequelize.define('TransactionHistories', {
+    return sequelize.define('PaymentHistories', {
         id: {
-            field:'tran_id',
+            field:'pay_id',
             type: type.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
-        buyerid: {
+        userid: {
             type: type.INTEGER,
             allowNull: false
         },
-        sellerid: {
+        coin: {
             type: type.INTEGER,
             allowNull: false
         },
-        chapid: {
-            type: type.INTEGER,
-            allowNull: false
-        },
-        chapCoin: {
-            type: type.INTEGER,
-            allowNull: false
-        },
-        tranDate: {
+        payerEmail: {
             type: type.STRING,
+            allowNull: false
+        },
+        payValue: {
+            type: type.STRING,
+            allowNull: false
+        },
+        payDate: {
+            type: type.STRING,
+            allowNull: false
+        },
+        payStatus: {
+            type: type.BOOLEAN,
             allowNull: false
         }
     }, {timestamps: false});

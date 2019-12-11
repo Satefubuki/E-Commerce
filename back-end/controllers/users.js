@@ -5,6 +5,15 @@ const { User } = require('../models/db');
 const { ErrorResult, Result } = require('../utils/base_response');
 const router = express.Router();
 
+// {
+//     "username": "linh920",
+//     "password": "123",
+//      "fullname": "tran huu linh",
+//      "birthday": "10-07-1996",
+//      "coin": 10,
+//      "email":"linh920@mail.com"
+//   }
+
 router.use((req, res, next) => {
     next();
 });

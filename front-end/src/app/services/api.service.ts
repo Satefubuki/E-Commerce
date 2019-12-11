@@ -26,7 +26,11 @@ export class ApiService {
     },
     chapterContent: {
       home: `${this.baseUrl}chapter-content`,
-    }
+    },
+    payment: {
+      home: `${this.baseUrl}payment`,
+      setStatus: `${this.baseUrl}payment/set-status`,
+    },
   };
 
   get<T>(url: string): Observable<T> {
