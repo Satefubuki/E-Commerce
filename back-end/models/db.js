@@ -15,7 +15,7 @@ const UnlockModel = require('./unlock');
 const RoleModel = require('./role');
 const RoleDetailModel = require('./role-detail');
 
-const sequelize = new Sequelize('ComicWebDB', 'sa', '12345', {
+const sequelize = new Sequelize('ComicWebDB', 'sa', '123', {
     dialect: 'mssql',
     host: 'localhost',
     dialectOptions: {
@@ -92,8 +92,9 @@ Chapter.hasMany(Unlock, {foreignKey: 'chapid', as: 'unlocks'});
 Unlock.belongsTo(User, {foreignKey: 'userid', as: 'user'});
 User.hasMany(Unlock, {foreignKey: 'userid', as: 'unlocks'});
 
-TransactionHistory.belongsTo(User, {foreignKey: 'userid', as: 'user'});
-User.hasMany(TransactionHistory, {foreignKey: 'userid', as: 'transactionHistories'});
+TransactionHistory.belongsTo(User, {foreignKey: 'buyerid', as: 'buyer'});
+// User.hasMany(TransactionHistory, {foreignKey: 'transactionHistories', as: 'transactionHistories'});
+TransactionHistory.belongsTo(Chapter, {foreignKey: 'chapid', as: 'chapter'});
 
 PaymentHistory.belongsTo(User, {foreignKey: 'userid', as: 'user'});
 User.hasMany(PaymentHistory, {foreignKey: 'userid', as: 'paymentHistory'});

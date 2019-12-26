@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
         this.userName = this.cookieService.get('userInfor');
         console.log(this.userName);
         this.authService.setLoggedIn(true);
-        this.router.navigate(['/list', res.data.id]).then(() => {
+        this.router.navigate(['/stories']).then(() => {
           window.location.reload();
         });
       } else {

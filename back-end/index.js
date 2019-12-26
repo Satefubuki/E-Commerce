@@ -94,6 +94,9 @@ app.use('/purcharsed-chapter', purchasedchapterCtrl);
 const paymentCtrl = require('./controllers/payment');
 app.use('/payment', paymentCtrl);
 
+const transactionHistoryCtrl = require('./controllers/transaction-historys');
+app.use('/transaction-historys', transactionHistoryCtrl);
+
 app.use((req, res) => {
     res.status(404).json(ErrorResult(404, 'API not found!'));
 });

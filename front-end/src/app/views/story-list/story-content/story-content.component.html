@@ -7,11 +7,11 @@
 <!-- <p *ngFor="let chap of chapters">{{chap.chapname}}</p>
 <p>{{content}}</p> -->
 
-<div class="container">
+<div class="container" appPreventCopy>
     <div class="row border-bottom">
         <div class="col-3"></div>
         <div class="col-6 text-center">
-            <h4 style="color: crimson;">{{chapContent.Chapters.chapname}}</h4> 
+            <h4 style="color: crimson;">{{chapter.chapname}}</h4> 
             <p>Truyện: {{story.storyname}}</p>
             <p>Tác giả: {{story.user.fullname}}</p>
         </div>

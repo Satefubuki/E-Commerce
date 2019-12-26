@@ -2,7 +2,7 @@ const express = require('express');
 const sequelize = require('sequelize');
 const { check, validationResult } = require('express-validator');
 const Op = sequelize.Op;
-const { Chapter, PurchasedChapter, User } = require('../models/db');
+const { Chapter, PurchasedChapter, User, TransactionHistory } = require('../models/db');
 const { ErrorResult, Result, PagingResult } = require('../utils/base_response');
 const router = express.Router();
 
@@ -263,6 +263,22 @@ router.post('/chapter-paying', (req, res) => {
         {
             userid: req.body.buyerid,
             chapid: req.body.chapid
+        }
+    ).then(type => {
+        res.json(Result(type));
+    }).catch(err => {
+        res.status(500).json(ErrorResult(500, err.errors));
+    });
+
+    // thêm mới thông tin vào bảng TransactionHistory
+    let date = new Date();
+    TransactionHistory.create(
+        {
+            buyerid: req.body.buyerid,
+            sellerid: req.body.sellerid,
+            chapid: req.body.chapid,
+            chapCoin:  req.body.chapCoin,
+            tranDate: date.getDate() + '/' + date.getMonth()+ '/' + date.getFullYear()
         }
     ).then(type => {
         res.json(Result(type));

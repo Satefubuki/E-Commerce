@@ -109,6 +109,8 @@ export class UserStoryChaptersComponent implements OnInit {
   // save
   save() {
     this.chapter.storyid = +this.id;
+    console.log(this.chapter.postdata);
+    
     this.chapterService.save(this.chapter).subscribe(res => {
       if (res.errorCode === 0) {
         this.editModal.hide();

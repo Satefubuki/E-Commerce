@@ -18,7 +18,8 @@ export class StoryContentComponent implements OnInit {
 
   story: Story;
   chapters: [StoriesChapter];
-  chapContent: ChapterContent;
+  chapter: StoriesChapter;
+  // chapContent: ChapterContent;
   content: string;
 
   page: Page = { pageNumber: 0, pageSize: 5 } as Page;
@@ -45,9 +46,10 @@ export class StoryContentComponent implements OnInit {
     //   this.chapters = res.data;
     // });
 
-    this.chapterContentService.get(chapId).subscribe(res => {
-      this.chapContent = res.data;
-      this.content = this.chapContent.content;
+    this.storyChaptersService.get(chapId).subscribe(res => {
+      this.chapter = res.data;
+      this.content = this.chapter.postdata;
+      console.log('------------------' + JSON.stringify(this.content));
     });
 
   }

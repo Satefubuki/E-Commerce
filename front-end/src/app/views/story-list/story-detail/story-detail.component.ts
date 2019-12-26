@@ -35,6 +35,8 @@ export class StoryDetailComponent implements OnInit {
 
     this.storyChaptersService.listByStoryId(stotyId, this.page).subscribe(res => {
       this.storyChapters = res.data;
+      console.log(JSON.stringify(this.storyChapters));
+      
     });
 
   }

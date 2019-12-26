@@ -31,6 +31,9 @@ export class ApiService {
       home: `${this.baseUrl}payment`,
       setStatus: `${this.baseUrl}payment/set-status`,
     },
+    transactionHistory: {
+      home: `${this.baseUrl}transaction-historys`,
+    }
   };
 
   get<T>(url: string): Observable<T> {
