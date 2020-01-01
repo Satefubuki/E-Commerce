@@ -34,7 +34,8 @@ export class StoryContentComponent implements OnInit {
   ngOnInit() {
     const storyId: number = Number(this.route.snapshot.paramMap.get('id'));
     const chapId: number = Number(this.route.snapshot.paramMap.get('chapId'));
-
+    const image = this.route.snapshot.paramMap.get('image');
+    console.log(this.route.snapshot.paramMap.get('story.imgUrl'));
     this.storyChaptersService.listByStoryId(storyId, this.page).subscribe(res => {
       this.chapters = res.data;
     });
@@ -52,6 +53,16 @@ export class StoryContentComponent implements OnInit {
       console.log('------------------' + JSON.stringify(this.content));
     });
 
+  }
+  goTop(event){
+    let scrollToTop = window.setInterval(() => {
+      let pos = window.pageYOffset;
+      if (pos > 0) {
+          window.scrollTo(0, pos - 20); // how far to scroll on each step
+      } else {
+          window.clearInterval(scrollToTop);
+      }
+  }, 16);
   }
 
   }
