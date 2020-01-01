@@ -34,8 +34,7 @@ export class StoryContentComponent implements OnInit {
   ngOnInit() {
     const storyId: number = Number(this.route.snapshot.paramMap.get('id'));
     const chapId: number = Number(this.route.snapshot.paramMap.get('chapId'));
-    const image = this.route.snapshot.paramMap.get('image');
-    console.log(this.route.snapshot.paramMap.get('story.imgUrl'));
+ 
     this.storyChaptersService.listByStoryId(storyId, this.page).subscribe(res => {
       this.chapters = res.data;
     });
