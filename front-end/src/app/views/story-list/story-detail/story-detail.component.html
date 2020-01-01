@@ -39,7 +39,7 @@
             <div class="border-bottom" name="dstruyen">
                 <h5 class="text-primary font-weight-normal"> Danh sách chương truyện: {{story.storyname}}</h5>
             </div>
-            <div>
+            <div style="overflow-y: scroll; height:300px;">
                 <ul *ngFor="let chap of storyChapters">
                     <li class="text-primary">
                         <a [routerLink]="[ '/stories', chap.storyid, chap.id]"
