@@ -22,4 +22,8 @@ export class UserService {
     get(id): Observable<RootObj<User>> {
         return this.apiService.get<RootObj<User>>(`${this.apiService.apiUrl.users.home}/${id}`);
     }
+
+    post(user:User): Observable<RootObj<User>>{
+        return this.apiService.post<RootObj<User>>(this.apiService.apiUrl.users.home, user);
+    }
 }

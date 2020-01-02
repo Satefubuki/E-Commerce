@@ -15,7 +15,7 @@ const UnlockModel = require('./unlock');
 const RoleModel = require('./role');
 const RoleDetailModel = require('./role-detail');
 
-const sequelize = new Sequelize('ComicWebDB', 'sa', '12345', {
+const sequelize = new Sequelize('ComicWebDB', 'sa', '1234', {
     dialect: 'mssql',
     host: 'localhost',
     dialectOptions: {

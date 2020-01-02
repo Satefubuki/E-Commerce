@@ -8,13 +8,14 @@ import { StoryUploadModule } from './views/story-upload/story-upload.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { UserActionModule } from './views/user-action/user-action.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppInterceptor } from './app.interceptor';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { AppGuard } from './app.guard';
 import { AdminActionModule } from './views/admin-action/admin-action.module';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import {FileUploadModule} from 'ng2-file-upload/file-upload/file-upload.module';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 
 @NgModule({
@@ -32,7 +33,9 @@ import {FileUploadModule} from 'ng2-file-upload/file-upload/file-upload.module';
     AdminActionModule,
     HttpClientModule,
     NgxDatatableModule,
-    MDBBootstrapModule.forRoot()
+    MDBBootstrapModule.forRoot(),
+    ReactiveFormsModule,
+    ModalModule.forRoot()
 
   ],
   providers: [{
