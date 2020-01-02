@@ -14,9 +14,19 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { AppGuard } from './app.guard';
 import { AdminActionModule } from './views/admin-action/admin-action.module';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
-import {FileUploadModule} from 'ng2-file-upload/file-upload/file-upload.module';
+import { FileUploadModule } from 'ng2-file-upload/file-upload/file-upload.module';
 import { ModalModule } from 'ngx-bootstrap/modal';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { 
+	IgxButtonModule,
+	IgxIconModule,
+	IgxLayoutModule,
+	IgxNavigationDrawerModule,
+	IgxRadioModule,
+	IgxRippleModule,
+	IgxSwitchModule,
+	IgxToggleModule
+ } from "igniteui-angular";
 
 @NgModule({
   declarations: [
@@ -35,8 +45,18 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     NgxDatatableModule,
     MDBBootstrapModule.forRoot(),
     ReactiveFormsModule,
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    IgxButtonModule,
+    IgxIconModule,
+    IgxLayoutModule,
+    IgxNavigationDrawerModule,
+    IgxRadioModule,
+    IgxRippleModule,
+    IgxSwitchModule,
+    IgxToggleModule
 
+    ,
+    BrowserAnimationsModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
@@ -48,4 +68,5 @@ import { ModalModule } from 'ngx-bootstrap/modal';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
