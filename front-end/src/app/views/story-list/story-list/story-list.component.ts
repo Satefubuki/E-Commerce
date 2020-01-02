@@ -19,6 +19,7 @@ export class StoryListComponent implements OnInit {
   loadStories() {
     this.storiesService.list2().subscribe(res => {
       this.stories = res.data;
+      console.log(this.stories);
     });
   }
 

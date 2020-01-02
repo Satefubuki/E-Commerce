@@ -26,6 +26,13 @@ export class ApiService {
     },
     chapterContent: {
       home: `${this.baseUrl}chapter-content`,
+    },
+    payment: {
+      home: `${this.baseUrl}payment`,
+      setStatus: `${this.baseUrl}payment/set-status`,
+    },
+    transactionHistory: {
+      home: `${this.baseUrl}transaction-historys`,
     }
   };
 

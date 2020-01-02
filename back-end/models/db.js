@@ -92,8 +92,9 @@ Chapter.hasMany(Unlock, {foreignKey: 'chapid', as: 'unlocks'});
 Unlock.belongsTo(User, {foreignKey: 'userid', as: 'user'});
 User.hasMany(Unlock, {foreignKey: 'userid', as: 'unlocks'});
 
-TransactionHistory.belongsTo(User, {foreignKey: 'userid', as: 'user'});
-User.hasMany(TransactionHistory, {foreignKey: 'userid', as: 'transactionHistories'});
+TransactionHistory.belongsTo(User, {foreignKey: 'buyerid', as: 'buyer'});
+// User.hasMany(TransactionHistory, {foreignKey: 'transactionHistories', as: 'transactionHistories'});
+TransactionHistory.belongsTo(Chapter, {foreignKey: 'chapid', as: 'chapter'});
 
 PaymentHistory.belongsTo(User, {foreignKey: 'userid', as: 'user'});
 User.hasMany(PaymentHistory, {foreignKey: 'userid', as: 'paymentHistory'});

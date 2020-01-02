@@ -13,8 +13,8 @@
           
             <div class="dropdown-menu dropdown-primary">
               <a class="dropdown-item" [routerLink]="[ '/list', userid ]">Danh sách truyện</a>
-              <a class="dropdown-item" href="#">Something else here</a>
-              <a class="dropdown-item" href="#">Something else here</a>
+              <a class="dropdown-item" [routerLink]="[ '/user/payment' ]">Nạp tiền</a>
+              <a class="dropdown-item" [routerLink]="[ '/user/transaction-histories', userid ]">Lịch sử bán</a>
               <div class="divider dropdown-divider"></div>
               <a class="dropdown-item" (click)=" logout()">Đăng xuất</a>
             </div>

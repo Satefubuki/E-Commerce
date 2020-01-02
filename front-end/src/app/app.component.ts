@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
+  title = 'storiesV1U1';
   userName: string;
   userid: string;
   show: boolean;
@@ -23,12 +24,10 @@ export class AppComponent implements OnInit{
    if(this.authService.isLoggedIn === true){
       this.userName = this.cookieService.get('username');
       this.userid = this.cookieService.get('userID');
-      console.log(this.cookieService.get('username'));
-      
       this.show = true;
    }
   }
-  title = 'storiesV1U1';
+  
 
   logout(): void{
     this.authService.setLoggedIn(false);

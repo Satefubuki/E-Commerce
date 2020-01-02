@@ -17,7 +17,6 @@ export class LoginComponent implements OnInit {
   userName: string;
 
   constructor(private userService: UserService,
-    private location: Location,
     // tslint:disable-next-line:align
     private authService: AuthService,
     // tslint:disable-next-line:align
@@ -42,8 +41,7 @@ export class LoginComponent implements OnInit {
         this.userName = this.cookieService.get('userInfor');
         console.log(this.userName);
         this.authService.setLoggedIn(true);
-        this.location.go('list');
-        this.router.navigate(['/list', res.data.id]).then(() => {
+        this.router.navigate(['/stories']).then(() => {
           window.location.reload();
         });
       } else {

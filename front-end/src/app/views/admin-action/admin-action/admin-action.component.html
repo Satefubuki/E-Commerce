@@ -1,0 +1,22 @@
+<div class="row">
+    <div class="col-12"></div>
+</div>
+<div class="row mt-1">
+    <div class="col-3">
+        <ul class="nav flex-column"
+            style="background-image: linear-gradient(seagreen,lightgreen); color: blanchedalmond;">
+            <li class="nav-item border">
+                <a class="nav-link text-light" routerLink="/admin/payment-managerment" >Quản lý thanh toán</a>
+            </li>
+            <li class="nav-item border">
+                <a class="nav-link text-light" routerLink="/admin/transaction-managerment">Quản lý giao dịch</a>
+            </li>
+            <li class="nav-item border">
+                <a class="nav-link text-light" href="#">Quản lý hóa đơn</a>
+            </li>
+        </ul>
+    </div>
+    <div class="col-9">
+        <router-outlet></router-outlet>
+    </div>
+</div>
