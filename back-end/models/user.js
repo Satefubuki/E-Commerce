@@ -24,7 +24,8 @@ module.exports = (sequelize, type) => {
         },
         coin: {
             type: type.FLOAT,
-            allowNull: true
+            allowNull: true,
+	    defaultValue: 0
         },
         email: {
             type: type.STRING,
