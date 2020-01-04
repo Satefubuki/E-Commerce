@@ -8,44 +8,57 @@
         <td style="border: 1px solid black;"><a [routerLink]="[ '/stories', chap.storyId, chap.id ]">{{chap.name}}</a></td>
     </tr>
 </table> -->
-
 <div class="container">
-    <div class="row mt-4">
+    <div class="row mt-4" >
         <div class="col-8 border shadow-sm">
             <div class="row">
-                <div class="col-4" style="font-size: 12px;">
-                    <img src="http://localhost:3000/uploads/{{story.imgUrl}}" style="width: 22rem; height: 25rem;" alt="loading...">
-                    <br> <a href="#"><i></i>Tên tác giả</a>
-                    <br> <a href="#"><i></i>Thể loại</a>
-                    <br> <span><i></i>Tải lên: 09:19:42 20/06/2018</span>
-                    <br> <span href="#"><i></i>Chỉnh sửa: 15:14:23 19/07/2019</span>
+                <div class="col-4 mt-3" >
+                    <img class='border' src="http://localhost:3000/uploads/{{story.imgUrl}}" style="width: 22rem; height: 25rem;" alt="loading...">
                 </div>
                 <div class="col-8">
+                    <div class="mt-3" >
                     <h4 class="font-weight-bolder text-danger">{{story.storyname}}</h4>
-                    <br> <button class="ml-5 btn btn-primary">DS Chương</button> <button
-                        class="ml-2 btn btn-primary">Đọc truyện</button>
-                    <br> <button class="ml-5 mt-2 btn btn-primary">Thêm vào truyện yêu thích</button>
+                    </div>
+                    <div style="font-size: 15px;">
+                        <br> <a href="#chap"><i></i>Tác giả</a>
+                        <br> <a href="#"><i></i>Thể loại</a>
+                        <br> <span><i></i>Tải lên: 09:19:42 20/06/2018</span>
+                        <br> <span href="#"><i></i>Chỉnh sửa: 15:14:23 19/07/2019</span>
+                    </div>
                     <br>
-                    <p class="mt-2">{{story.description}}</p>
+                    <span>
+                    <button (click)="goToChap($event)" class="ml-3 btn button" style="background-color: #370eec;"><i class="fa fa-book"></i> DS Chương</button>
+                    <button class="ml-4 button btn " style="background-color: #15ec0e;"><i class="fa fa-bookmark-o"></i> Đọc truyện</button>
+                    <button class="ml-4 mt-2 btn button" style="background-color: #ec420e;"><i class="fa fa-heart"></i> Yêu thích</button>
+                    </span>
+                    
+                    <div class = "card mt-2 mb-2" style="height: 18rem;">
+                    <p class="m-3 border-bottom">{{(showMore) ? story.description : story.description | slice:0:80}}</p>
+                    <div style="margin-left: 160px;"> 
+                    <button class="button" style="width: 130px; height: 30px; font-size: 12px; padding:5px" (click)="show()"><span>{{tit}}  </span></button>
+                    </div>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="col-1"></div>
-        <div class="col-3" style="background-color: royalblue;"></div>
+        <div class="col-3" style="">
+            <img style="width: 360px; height: 550px;" src="../../../../assets/adsense.jpg"/>
+        </div>
     </div>
     <!----------------------------->
-    <div class="row mt-4">
-        <div class="col-8 border shadow-sm">
+    <div class="row mt-4 mb-5" >
+        <div class="col-8 shadow-sm">
             <div class="border-bottom" name="dstruyen">
-                <h5 class="text-primary font-weight-normal"> Danh sách chương truyện: {{story.storyname}}</h5>
+                <h5 id="chap" class="font-weight-normal" style="color: #f3a410;"><i class="fa fa-star-o"></i> Danh sách chương truyện: {{story.storyname}}</h5>
             </div>
-            <div style="overflow-y: scroll; height:300px;">
+            <div class="border" style="overflow-y: scroll; height:300px;">
                 <ul *ngFor="let chap of storyChapters">
-                    <li class="text-primary">
+                    <li class="text-primary border-bottom mt-3 ml-2 mr-2">
                         <a [routerLink]="[ '/stories', chap.storyid, chap.id]"
                             [state]="{storyid: story.id ,chapid: chap.id}">
-                            <span *ngIf="chap.chapstatus == false">{{chap.chapname}}</span>
-                            <span *ngIf="chap.chapstatus == true">{{chap.chapname}} (*)</span>
+                            <span class="ml-5 "  *ngIf="chap.chapstatus == false">{{chap.chapname}}</span>
+                            <span class="ml-5" *ngIf="chap.chapstatus == true">{{chap.chapname}} (*)</span>
                         </a>
                     </li>
                 </ul>

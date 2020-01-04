@@ -14,7 +14,8 @@ import { Page } from 'src/app/models/page';
 export class StoryDetailComponent implements OnInit {
   story: Story;
   storyChapters: [StoriesChapter];
-
+  showMore = false;
+  tit = 'Xem Thêm';
   page: Page = { pageNumber: 0, pageSize: 5 } as Page;
 
   constructor(
@@ -36,9 +37,17 @@ export class StoryDetailComponent implements OnInit {
     this.storyChaptersService.listByStoryId(stotyId, this.page).subscribe(res => {
       this.storyChapters = res.data;
       console.log(JSON.stringify(this.storyChapters));
-      
     });
-
   }
-
+  show(){
+    this.showMore = !this.showMore;
+    if(this.showMore === false){
+      this.tit = 'Xem Thêm';
+    }else{
+      this.tit = 'Rút gọn';
+    }
+  }
+  goToChap(event){
+     window.scrollTo(0, 900); 
+  }
 }
