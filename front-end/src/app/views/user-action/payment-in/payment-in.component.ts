@@ -18,6 +18,28 @@ export class PaymentInComponent implements OnInit {
   money = 0;
   value = '';
 
+  public pay = [{
+    value: "0",
+    name: "None"
+    },{
+    value: "1",
+    name: "1 xu (0.02$)"
+    }, {
+    value: "10",
+    name: "10 xu (0.2$)"
+    }, {
+    value: "100",
+    name: "100 xu (2$)"
+    },
+    {
+    value: "1000",
+    name: "1000 xu (20$)"
+    },
+    {
+    value: "10000",
+    name: "10000 xu (200$)"
+    },];
+    public selectedValue: string = this.pay[0].value;
   public payPalConfig?: IPayPalConfig;
 
   constructor(private paymentService: PaymentService, private cookieService: CookieService) {
@@ -106,5 +128,9 @@ export class PaymentInComponent implements OnInit {
         console.log('onClick', data, actions);
       },
     };
+  }
+  choose(event){
+    this.coin = this.selectedValue as any;
+    this.convert();
   }
 }

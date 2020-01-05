@@ -25,7 +25,7 @@ import {
 	IgxRadioModule,
 	IgxRippleModule,
 	IgxSwitchModule,
-	IgxToggleModule
+  IgxToggleModule,
  } from "igniteui-angular";
 
 @NgModule({

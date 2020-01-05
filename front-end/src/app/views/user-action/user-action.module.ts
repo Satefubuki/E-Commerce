@@ -7,11 +7,12 @@ import { FormsModule } from '@angular/forms';
 import { PaymentInComponent } from './payment-in/payment-in.component';
 import { NgxPayPalModule } from 'ngx-paypal';
 import { TransactionHistoriesComponent } from './transaction-histories/transaction-histories.component';
-
+import { IgxRadioModule } from "igniteui-angular";
 
 @NgModule({
   declarations: [LoginComponent, PaymentInComponent, TransactionHistoriesComponent],
   imports: [
+    IgxRadioModule,
     CommonModule,
     FormsModule,
     UserActionRoutingModule,
