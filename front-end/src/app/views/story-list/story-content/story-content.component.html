@@ -8,12 +8,12 @@
 <p>{{content}}</p> -->
 <input (click)="goTop($event)" type="image" alt="top" src="../../../../assets/back_to_top.png" width="40px" height="40px" style="position:fixed; bottom: 4rem; right: 2rem;"/>
 <div style="background-color: #6E6E6E;">
-<div class="container"   appPreventCopy>
+<div class="container pt-3"   appPreventCopy>
     <div class="card" style="width: 70rem;">
     <div class="row">
         <div class="col-3"></div>
         <div class="col-6 text-center">
-            <h4 style="color: crimson;">{{story.storyname}}</h4> 
+            <h4 style="color: crimson; padding-top: 5px;">{{story.storyname}}</h4> 
             <p style="color:blue">{{chapter.chapname}}</p>
             <p>- {{story.user.fullname}} -</p>
         </div>
@@ -21,7 +21,7 @@
     </div>
     </div>
     <div class="col-12 d-flex justify-content-center m-3">
-    <img class="border col-16" src="http://localhost:3000/uploads/{{story.imgUrl}}" width="500rem" height="850rem" />
+    <img class="border" src="http://localhost:3000/uploads/{{story.imgUrl}}" width="500rem" height="850rem" />
     </div>
     <div class="row">
         <div class="col-1"> </div>
@@ -31,7 +31,7 @@
        
     </div>
     <div class="col-1 mb-5 pt-3" style="background-color: #6E6E6E"> </div>
-    <nav class="fixed-bottom" style="background: rgba(0, 0, 0, 0.7); height:50px ;display: inline-block;">
+    <nav class="fixed-bottom" style="background: rgba(0, 0, 0, 0.7); height:3.5rem ;display: inline-block;">
         <div class="row">
             <div class="col-12 d-flex justify-content-center">
                 <button class="mt-2 btn-primary" style="width: 150px;height:35px;" > &#171; Chương trước</button>

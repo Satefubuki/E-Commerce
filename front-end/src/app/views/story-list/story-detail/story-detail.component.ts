@@ -47,7 +47,7 @@ export class StoryDetailComponent implements OnInit {
       this.tit = 'Rút gọn';
     }
   }
-  goToChap(event){
+  goToChap(){
      window.scrollTo(0, 900); 
   }
 }
