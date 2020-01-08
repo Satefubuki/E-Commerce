@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 import { StoryListRoutingModule } from './story-list-routing.module';
 import { StoryListComponent } from './story-list/story-list.component';
@@ -19,7 +20,8 @@ import { StoryPaymentComponent } from './story-payment/story-payment.component';
   ],
   imports: [
     CommonModule,
-    StoryListRoutingModule
+    NgxPaginationModule,
+    StoryListRoutingModule,
   ]
 })
 export class StoryListModule { }

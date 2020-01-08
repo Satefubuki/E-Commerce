@@ -97,6 +97,9 @@ app.use('/payment', paymentCtrl);
 const transactionHistoryCtrl = require('./controllers/transaction-historys');
 app.use('/transaction-historys', transactionHistoryCtrl);
 
+const send = require('./controllers/mailer');
+app.use('/send', send);
+
 app.use((req, res) => {
     res.status(404).json(ErrorResult(404, 'API not found!'));
 });

@@ -8,9 +8,10 @@ import { PaymentInComponent } from './payment-in/payment-in.component';
 import { NgxPayPalModule } from 'ngx-paypal';
 import { TransactionHistoriesComponent } from './transaction-histories/transaction-histories.component';
 import { IgxRadioModule } from "igniteui-angular";
+import { ForgotComponent } from './forgot/forgot.component';
 
 @NgModule({
-  declarations: [LoginComponent, PaymentInComponent, TransactionHistoriesComponent],
+  declarations: [LoginComponent, PaymentInComponent, TransactionHistoriesComponent, ForgotComponent],
   imports: [
     IgxRadioModule,
     CommonModule,

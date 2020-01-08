@@ -33,6 +33,9 @@ export class ApiService {
     },
     transactionHistory: {
       home: `${this.baseUrl}transaction-historys`,
+    },
+    forgot: {
+      forgot: `${this.baseUrl}send`,
     }
   };
 

@@ -4,6 +4,7 @@ import { PaymentService } from 'src/app/services/payment.service';
 import { CookieService } from 'ngx-cookie-service';
 import { User } from 'src/app/models/user';
 import { Payment } from 'src/app/models/payment';
+import { PnotifyService } from 'src/app/utils/pnotify.service';
 
 @Component({
   selector: 'app-root',
@@ -42,7 +43,7 @@ export class PaymentInComponent implements OnInit {
     public selectedValue: string = this.pay[0].value;
   public payPalConfig?: IPayPalConfig;
 
-  constructor(private paymentService: PaymentService, private cookieService: CookieService) {
+  constructor(private paymentService: PaymentService, private cookieService: CookieService,  private pnotifyService: PnotifyService) {
     this.user = JSON.parse(this.cookieService.get('userInfo'));
   }
 
@@ -117,6 +118,7 @@ export class PaymentInComponent implements OnInit {
       onClientAuthorization: (data) => {
         console.log('onClientAuthorization - you should probably inform your server about completed transaction at this point', data);
         // this.showSuccess = true;
+        this.pnotifyService.success('Info', 'Giao dịch đang chờ xử lý');
       },
       onCancel: (data, actions) => {
         console.log('OnCancel', data, actions);
