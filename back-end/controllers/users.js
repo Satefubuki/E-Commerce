@@ -1,6 +1,8 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const helper = require('../utils/helper');
+const sequelize = require('sequelize');
+const Op = sequelize.Op;
 const { User } = require('../models/db');
 const { ErrorResult, Result } = require('../utils/base_response');
 const router = express.Router();
@@ -37,13 +39,26 @@ router.get('/:id(\\d+)', (req, res) => {
 router.post('/', (req, res) => {
     console.log('da vao');
 
-    req.body.password = helper.hash(req.body.password);
-    User.create(req.body).then(type => {
-        res.json(Result(type));
-    }).catch(err => {
-        return res.status(400).json(ErrorResult(404, err.errors));
-    });
-})
+    User.findAll({
+        where: {[Op.or]: [
+                { username: { [Op.like]: req.body.username } },
+                { email: { [Op.like]: req.body.email } }
+            ]
+        }
+    }).then(users => {
+        if (users[0] != null) {
+            res.status(401).json(ErrorResult(401, 'username does existed'));
+        } else {
+            req.body.password = helper.hash(req.body.password);
+            User.create(req.body).then(type => {
+                res.json(Result(type));
+            }).catch(err => {
+                return res.status(400).json(ErrorResult(404, err.errors));
+            });
+        }
+    })
+
+});
 
 router.post('/login', (req, res) => {
     console.log('req.body: ' + req.body.username);
@@ -65,6 +80,22 @@ router.post('/login', (req, res) => {
             }));
         } else {
             res.status(401).json(ErrorResult(401, 'Invalid username or password'));
+        }
+    });
+});
+
+router.put('/:id(\\d+)', (req, res) => {
+    User.findByPk(req.params.id).then(type => {
+        if (type != null) {
+            type.update({
+                password: helper.hash(req.body.password)
+            }).then(type => {
+                res.json(Result(type));
+            }).catch(err => {
+                res.status(400).json(ErrorResult(400, err.errors));
+            });
+        } else {
+            res.status(404).json(ErrorResult(404, 'Not Found'));
         }
     });
 });

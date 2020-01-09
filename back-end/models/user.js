@@ -1,7 +1,7 @@
 module.exports = (sequelize, type) => {
     return sequelize.define('Users', {
         id: {
-            field:'userid',
+            field: 'userid',
             type: type.INTEGER,
             primaryKey: true,
             autoIncrement: true
@@ -25,11 +25,11 @@ module.exports = (sequelize, type) => {
         coin: {
             type: type.FLOAT,
             allowNull: true,
-	    defaultValue: 0
+            defaultValue: 0
         },
         email: {
             type: type.STRING,
             allowNull: true
         }
-    }, {timestamps: false});
+    }, { timestamps: false });
 }
