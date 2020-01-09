@@ -88,7 +88,7 @@ router.put('/:id(\\d+)', (req, res) => {
     User.findByPk(req.params.id).then(type => {
         if (type != null) {
             type.update({
-                password: helper.hash(req.body.password)
+                password: helper.hash(req.body.confirmPassword)
             }).then(type => {
                 res.json(Result(type));
             }).catch(err => {
