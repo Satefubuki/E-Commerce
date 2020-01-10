@@ -28,6 +28,16 @@ export class UserService {
         return this.apiService.post<RootObj<User>>(this.apiService.apiUrl.users.home, user);
     }
 
+    getCode(email: object): Observable<object> {
+        console.log((this.apiService.apiUrl.users.code));
+        console.log(JSON.stringify(email));
+        return this.apiService.post(this.apiService.apiUrl.users.code, email);
+    }
+
+    getNewPassword(body: object): Observable<object> {
+        return this.apiService.post(this.apiService.apiUrl.users.newPass, body);
+    }
+
     changePassword(id, data): Observable<RootObj<User>> {
         return this.apiService.put<RootObj<User>>(`${this.apiService.apiUrl.users.home}/${id}`, data);
     }

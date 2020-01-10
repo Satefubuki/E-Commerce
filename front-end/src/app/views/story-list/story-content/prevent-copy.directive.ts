@@ -25,7 +25,7 @@ export class PreventCopyDirective {
     if ($event.keyCode === 123) {
       event.preventDefault();
     }
-    if ($event.keyCode === 93) {
+    if (($event.ctrlKey || $event.metaKey) && $event.keyCode === 93) {
       event.preventDefault();
     }
   }

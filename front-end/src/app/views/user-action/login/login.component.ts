@@ -4,6 +4,9 @@ import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { UserService } from 'src/app/services/user.service';
+import { PnotifyService } from 'src/app/utils/pnotify.service';
+import { log } from 'util';
+
 
 @Component({
   selector: 'app-login',
@@ -22,6 +25,7 @@ export class LoginComponent implements OnInit {
     // tslint:disable-next-line:align
     private cookieService: CookieService,
     // tslint:disable-next-line:align
+    private pnNofity: PnotifyService,
     private router: Router) { }
 
   ngOnInit() {
@@ -29,6 +33,8 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.userService.login(this.username, this.password).subscribe(res => {
+      console.log('-----------'+res);
+      
       if (res.errorCode === 0) {
         this.message = '';
         // save user info, then redirect to dashboard
@@ -43,9 +49,9 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/stories']).then(() => {
           window.location.reload();
         });
-      } else {
-        this.message = res.message;
       }
+    }, err => {
+      this.pnNofity.error('Login', 'Tên đăng nhập hoặc mật khẩu');
     });
   }
 

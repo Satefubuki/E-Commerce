@@ -56,7 +56,11 @@
                 </div>
                 <div class="row mt-3">
                     <div class="p-2 mb-4 border" style="width:11.8rem;margin-left: 2.4rem;"
+<<<<<<< HEAD
                         *ngFor="let story of stories | paginate: { itemsPerPage: 8, currentPage: p }">
+=======
+                        *ngFor="let story of stories">
+>>>>>>> ee97aa05aac2e95f6ecbe25cee67d2851934eba4
                         <a [routerLink]="[ '/stories', story.id ]"><img class="border-bottom mb-2 pb-2"
                                 src="http://localhost:3000/uploads/{{story.imgUrl}}"
                                 style="width: 220px; height: 300px;" alt="loading..."></a>

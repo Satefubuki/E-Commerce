@@ -17,6 +17,7 @@ export class StoryListComponent implements OnInit {
   top4: Story;
   top5: Story;
   show: boolean;
+  p: number = 1;
   constructor(private storiesService: StoriesService) { }
 
   ngOnInit() {

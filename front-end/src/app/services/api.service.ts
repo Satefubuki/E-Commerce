@@ -12,7 +12,9 @@ export class ApiService {
   apiUrl = {
     users: {
       home: `${this.baseUrl}users`,
-      login: `${this.baseUrl}users/login`
+      login: `${this.baseUrl}users/login`,
+      code: `${this.baseUrl}send/code`,
+      newPass: `${this.baseUrl}send/new-password`,
     },
     stories: {
       home: `${this.baseUrl}stories`,
@@ -34,9 +36,6 @@ export class ApiService {
     transactionHistory: {
       home: `${this.baseUrl}transaction-historys`,
     },
-    forgot: {
-      forgot: `${this.baseUrl}send`,
-    }
   };
 
   get<T>(url: string): Observable<T> {
