@@ -56,20 +56,13 @@
                 </div>
                 <div class="row mt-3">
                     <div class="p-2 mb-4 border" style="width:11.8rem;margin-left: 2.4rem;"
-<<<<<<< HEAD
                         *ngFor="let story of stories">
-=======
-                        *ngFor="let story of stories | paginate: { itemsPerPage: 1, currentPage: p }">
->>>>>>> e7a9f4a3efcfbc80e99d3ecf963c7628b8f0d603
                         <a [routerLink]="[ '/stories', story.id ]"><img class="border-bottom mb-2 pb-2"
                                 src="http://localhost:3000/uploads/{{story.imgUrl}}"
                                 style="width: 220px; height: 300px;" alt="loading..."></a>
                         <span style="text-align: center;">{{story.storyname}}</span>
                     </div>
-<<<<<<< HEAD
-=======
                     <pagination-controls (pageChange)="p = $event"></pagination-controls>
->>>>>>> e7a9f4a3efcfbc80e99d3ecf963c7628b8f0d603
                 </div>
             </div>
             <div class="col-2" style="padding-left: 3.5rem;">
