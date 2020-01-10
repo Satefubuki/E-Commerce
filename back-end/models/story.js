@@ -11,7 +11,7 @@ module.exports = (sequelize, type) => {
             allowNull: false
         },
         description: {
-            type: type.STRING,
+            type: type.TEXT,
             allowNull: true
         },
         copyright: {
