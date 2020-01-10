@@ -60,12 +60,18 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    
+    console.log(this.user.coin);
     if (this.authService.isLoggedIn === true) {
       this.userName = this.cookieService.get('username');
       this.userid = this.cookieService.get('userID');
       this.hashedPass = this.cookieService.get('password');
       this.show = true;
+   
     }
+    this.userService.get(this.userid).subscribe(res =>{
+      this.user = res.data;
+    });
   }
 
   // convenience getter for easy access to form fields

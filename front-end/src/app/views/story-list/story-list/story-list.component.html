@@ -48,7 +48,7 @@
                 </div>
             </div>
         </div>
-        <div class="row ">
+        <div class="row">
             <div class="col-10 border center" style="background-color: #FFFFFF;">
                 <div class="border-bottom">
                     <h5 id="chap" class="font-weight-normal pt-2" style="color: #0deb50;"><i class="fa fa-star-o"></i>
@@ -56,13 +56,17 @@
                 </div>
                 <div class="row mt-3">
                     <div class="p-2 mb-4 border" style="width:11.8rem;margin-left: 2.4rem;"
-                        *ngFor="let story of stories | paginate: { itemsPerPage: 1, currentPage: p }">
+                        *ngFor="let story of stories | paginate: { itemsPerPage: 8, currentPage: p }">
                         <a [routerLink]="[ '/stories', story.id ]"><img class="border-bottom mb-2 pb-2"
                                 src="http://localhost:3000/uploads/{{story.imgUrl}}"
                                 style="width: 220px; height: 300px;" alt="loading..."></a>
                         <span style="text-align: center;">{{story.storyname}}</span>
                     </div>
-                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                    <div class="col-12 border-top right" style="padding-top: 10px;">
+                    <div style="margin-left: 40rem;">
+                    <pagination-controls  (pageChange)="p = $event"></pagination-controls>
+                    </div>
+                    </div>
                 </div>
             </div>
             <div class="col-2" style="padding-left: 3.5rem;">

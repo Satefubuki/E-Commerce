@@ -15,8 +15,12 @@
                 </div>
             </div>
         </div>
+        
         <div *ngIf="show; else elseBlock">
+            <div class="row">
+            <span style="padding-top: 1rem; padding-right: 3rem;">{{user.coin}} <i class="fa fa-bitcoin" style="color: gold;"></i></span>
             <div class="mr-sm-2">
+
                 <div class="" mdbDropdown>
                     <button mdbDropdownToggle type="button" mdbBtn class="dropdown-toggle">
                         Xin chào, {{userName}}
@@ -34,7 +38,7 @@
                     </div>
                 </div>
             </div>
-
+        </div>
             <div bsModal #changePasswordModal="bs-modal" class="modal fade" tabindex="-1" role="dialog"
                 aria-labelledby="dialog-child-name">
                 <div class="modal-dialog">
