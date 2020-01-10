@@ -8,6 +8,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { PnotifyService } from './utils/pnotify.service';
 import { UserService } from './services/user.service';
 import { MustMatch } from './models/MustMatch';
+import { ChangePass } from './models/changepass';
 
 
 @Component({
@@ -17,14 +18,19 @@ import { MustMatch } from './models/MustMatch';
 })
 export class AppComponent implements OnInit {
   @ViewChild('registerModal', { static: false }) registerModal: ModalDirective;
+  @ViewChild('changePasswordModal', { static: false }) changePasswordModal: ModalDirective;
   title = 'storiesV1U1';
   userName: string;
   userid: string;
+  hashedPass: string;
   show: boolean;
+
+  changeP: ChangePass = {} as ChangePass;
 
   user: User = {} as User;
 
   registerForm: FormGroup;
+  changePasswordForm: FormGroup;
   submitted = false;
   constructor(
     private cookieService: CookieService,
@@ -44,12 +50,20 @@ export class AppComponent implements OnInit {
     }, {
       validator: MustMatch('password', 'confirmPassword')
     });
-   }
+
+    this.changePasswordForm = this.formBuilder.group({
+      oldPassword: ['', Validators.required],
+      newPassword: ['', [Validators.required, Validators.minLength(6)]],
+      confirmPassword: ['', [Validators.required, Validators.minLength(6)]]
+    });
+
+  }
 
   ngOnInit(): void {
     if (this.authService.isLoggedIn === true) {
       this.userName = this.cookieService.get('username');
       this.userid = this.cookieService.get('userID');
+      this.hashedPass = this.cookieService.get('password');
       this.show = true;
     }
   }
@@ -64,8 +78,8 @@ export class AppComponent implements OnInit {
     this.router.navigate(['/']);
   }
 
-   // modals
-   hideModal() {
+  // modals
+  hideModal() {
     this.registerModal.hide();
   }
 
@@ -74,9 +88,17 @@ export class AppComponent implements OnInit {
     this.registerModal.show();
   }
 
+  openChangePassword() {
+    this.changePasswordModal.show();
+  }
+
+  hideChangePassword() {
+    this.changePasswordModal.hide();
+  }
+
   save() {
     this.userService.post(this.user).subscribe(res => {
-      if(res.errorCode == 0) {
+      if (res.errorCode == 0) {
         this.user = {} as User;
         this.pnotify.success('Register', 'Sucessfully!');
       } else {
@@ -86,6 +108,26 @@ export class AppComponent implements OnInit {
       this.pnotify.error('Register', err);
     });
     this.hideModal();
+  }
+
+  changePassword(f) {
+    if (f.oldPassword === this.hashedPass) {
+      if (f.newPassword === f.confirmPassword) {
+        this.userService.changePassword(this.userid, this.changeP).subscribe(res => {
+          if (res.errorCode == 0) {
+            this.pnotify.success('Change Password', 'Sucessfully!');
+          } else {
+            this.pnotify.error('Change Password', 'Failed');
+          }
+        });
+      } else {
+        this.pnotify.error('Change Password', 'New and Confirm password is not matched');
+      }
+    } else {
+      this.pnotify.error('Change Password', 'Old password is incorrect');
+    }
+    this.changeP = {} as ChangePass;
+    this.hideChangePassword();
   }
 
 }

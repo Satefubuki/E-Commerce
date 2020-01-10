@@ -31,8 +31,6 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
-
-
   login() {
     this.userService.login(this.username, this.password).subscribe(res => {
       console.log('-----------'+res);
@@ -42,9 +40,10 @@ export class LoginComponent implements OnInit {
         // save user info, then redirect to dashboard
         this.cookieService.set('userInfo', JSON.stringify(res.data));
         this.cookieService.set('username', res.data.username);
+        this.cookieService.set('password', this.password);
         this.cookieService.set('userID', res.data.id.toString());
         this.cookieService.set('token', res.data.token);
-        this.userName = this.cookieService.get('userInfor');
+        this.userName = this.cookieService.get('userInfo');
         console.log(this.userName);
         this.authService.setLoggedIn(true);
         this.router.navigate(['/stories']).then(() => {
